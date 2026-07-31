@@ -1,8 +1,3 @@
-Tentu, ini sudah gue susun ulang dan lengkapi sesuai dengan *template* yang lu kasih, digabung dengan konfigurasi Docker dan penjelasan Terraform sebelumnya.
-
-Lu bisa langsung *copy-paste* teks di dalam blok kode di bawah ini ke dalam *file* `README.md` lu:
-
-```markdown
 # DevOps Test Submission - GoFiber & Terraform
 
 **Version:** `1.0.0`
@@ -234,7 +229,3 @@ Copyright © 2026 Dino Darmayanto
 All rights reserved.
 
 Project Submission For: DevOps Test
-
-```
-
-```
