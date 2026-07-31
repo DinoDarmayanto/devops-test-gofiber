@@ -149,13 +149,19 @@ Setelah aplikasi berhasil berjalan, endpoint berikut dapat diakses:
 Pastikan aplikasi berhasil berjalan dengan melihat log berikut menggunakan perintah `docker compose logs web`:
 
 ```text
- ┌───────────────────────────────────────────────────┐ 
- │                   Fiber v2.x.x                    │ 
- │               [http://127.0.0.1:3000](http://127.0.0.1:3000)               │ 
- └───────────────────────────────────────────────────┘ 
+web-1  |     _______ __
+web-1  |    / ____(_) /_  ___  _____
+web-1  |   / /_  / / __ \/ _ \/ ___/
+web-1  |  / __/ / / /_/ /  __/ /
+web-1  | /_/   /_/_.___/\___/_/          v3.4.0
+web-1  | --------------------------------------------------
+web-1  | INFO Server started on:        [http://127.0.0.1:3000](http://127.0.0.1:3000) (bound on host 0.0.0.0 and port 3000)
+web-1  | INFO Total handlers:           2
+web-1  | INFO Prefork:                  Disabled
+web-1  | INFO PID:                      1
+web-1  | INFO Total process count:      1
 
 ```
-
 Jika log tersebut muncul, maka aplikasi siap digunakan.
 
 ### Configuration Description
