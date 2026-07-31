@@ -1,8 +1,8 @@
 # DevOps Test Submission - GoFiber & Terraform
 
 **Version:** `1.0.0`
-**Project Type:** **Golang:** `1.20`
-**Build Tool:** `Docker Compose`
+**Project Type:** **Golang:** `Latest`
+**Build Tool:** `Docker Compose V2`
 **Database:** `Redis`
 
 ## Tech Stack
@@ -31,6 +31,7 @@ devops-test-gofiber
 ├── main.go
 ├── README.md
 └── test Devops.pdf
+
 ```
 
 ## Configuration
@@ -43,17 +44,32 @@ File ini merupakan konfigurasi utama aplikasi yang digunakan saat menjalankan pr
 
 ```dockerfile
 # Stage 1: Builder
-FROM golang:1.20-alpine AS builder
+FROM golang:alpine AS builder
+
+# Set working directory
 WORKDIR /app
+
+# Copy source code
 COPY . .
+
+# Install dependencies sesuai instruksi
 RUN go mod tidy
+
+# Build aplikasi Golang
 RUN go build -o main .
 
 # Stage 2: Runner (Minimal Image)
 FROM alpine:latest
+
 WORKDIR /app
+
+# Copy hasil build dari stage builder
 COPY --from=builder /app/main .
+
+# Expose port sesuai instruksi
 EXPOSE 3000
+
+# Run aplikasi Fiber
 CMD ["./main"]
 
 ```
@@ -61,14 +77,13 @@ CMD ["./main"]
 **docker-compose.yml:**
 
 ```yaml
-version: '3.8'
-
 services:
   web:
     build: .
     ports:
       - "3000:3000"
     environment:
+      # Memastikan aplikasi bisa konek ke Redis menggunakan env var
       - REDIS_ADDR=redis:6379
     depends_on:
       - redis
@@ -99,7 +114,7 @@ Berikut adalah environment variable yang dapat digunakan untuk melakukan overrid
 Untuk melakukan *build* dan menjalankan seluruh *service* secara otomatis, gunakan perintah berikut di terminal:
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 
 ```
 
@@ -131,7 +146,7 @@ Setelah aplikasi berhasil berjalan, endpoint berikut dapat diakses:
 
 ### Startup Verification
 
-Pastikan aplikasi berhasil berjalan dengan melihat log berikut menggunakan perintah `docker-compose logs web`:
+Pastikan aplikasi berhasil berjalan dengan melihat log berikut menggunakan perintah `docker compose logs web`:
 
 ```text
  ┌───────────────────────────────────────────────────┐ 
@@ -147,7 +162,7 @@ Jika log tersebut muncul, maka aplikasi siap digunakan.
 
 | Property | Description |
 | --- | --- |
-| Multi-stage Build | Menggunakan `golang:alpine` sebagai *builder* dan `alpine:latest` sebagai *runner* agar *image* akhir berukuran sangat kecil dan aman. |
+| Multi-stage Build | Menggunakan `golang:alpine` (latest) sebagai *builder* dan `alpine:latest` sebagai *runner* agar *image* akhir berukuran sangat kecil, aman, dan kompatibel dengan versi Go terbaru. |
 | Port Expose | Aplikasi mengekspos port `3000` sesuai instruksi *test*. |
 
 ---
@@ -217,6 +232,7 @@ Respon yang diharapkan: `Hello, World!`
 ### v1.0.0
 
 * Menambahkan konfigurasi Dockerfile (*multi-stage build*) untuk aplikasi GoFiber `hello-world`.
+* Memperbarui Golang base image ke `alpine` terbaru untuk kompabilitas versi.
 * Menambahkan konfigurasi `docker-compose.yml` untuk orkestrasi aplikasi web dan Redis.
 * Menyusun dokumentasi penjelasan *script* Terraform GCP beserta analisis mitigasi risiko.
 
