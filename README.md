@@ -1,5 +1,3 @@
-<<<<<<< HEAD
----
 title: Hello World
 keywords: [hello world, golang, fiber]
 description: A simple "Hello, World!" application.
@@ -74,6 +72,3 @@ func hello(c fiber.Ctx) error {
 
 - [Fiber Documentation](https://docs.gofiber.io)
 - [Golang Documentation](https://golang.org/doc/)
-=======
-# devops-test-gofiber
->>>>>>> 1cadd41d724aa3989debaad9c72cc01a06536460
